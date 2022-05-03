@@ -5,10 +5,20 @@ module.exports = {
     mode: 'development',
     entry: './src/index.js',
     output: {
-        path: path.join(__dirname, '/dist'),
-        filename: "index_bundle.js"
+        filename: '[name].bundle.js',
+        chunkFilename: '[name].bundle.js',
+        path: path.resolve(__dirname, 'dev')
+    },
+    resolve: {
+        modules: [path.resolve(__dirname, './src'), 'node_modules'],
+        extensions: ['.js', '.jsx', '.json']
     },
     devtool: 'source-map',
+    optimization: {
+        splitChunks: {
+            chunks: 'all',
+        }
+    },
     module: {
         rules: [
             {

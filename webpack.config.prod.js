@@ -5,8 +5,23 @@ module.exports = {
     mode: 'production',
     entry: './src/index.js',
     output: {
-        path: path.join(__dirname, '/dist'),
-        filename: "index_bundle.js"
+        filename: '[name].bundle.js',
+        chunkFilename: '[name].bundle.js',
+        path: path.resolve(__dirname, 'build'),
+    },
+    resolve: {
+        modules: [path.resolve(__dirname, './src'), 'node_modules'],
+        extensions: ['.js', '.jsx', '.json']
+    },
+    optimization: {
+        splitChunks: {
+            chunks: 'all',
+        }
+    },
+    performance: {
+        hints: false,
+        maxEntrypointSize: 512000,
+        maxAssetSize: 512000
     },
     module: {
         rules: [
